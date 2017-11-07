@@ -3,11 +3,11 @@ use std::collections::HashMap;
 use super::utils;
 
 pub fn solve() -> i64 {
-    let mut target_factorization: HashMap<i64, u64> = HashMap::new();
+    let mut target_factorization: HashMap<u64, u32> = HashMap::new();
 
-    for x in 1..21 {
-        let x_factorization = utils::hist(utils::prime_factorization(x));
-        for (factor, quantity) in x_factorization {
+    for n in 1..21 {
+        let n_factorization = utils::hist(utils::prime_factorization(n));
+        for (factor, quantity) in n_factorization {
             let q = target_factorization.entry(factor).or_insert(0);
             if quantity > *q {
                 *q = quantity;
@@ -15,11 +15,5 @@ pub fn solve() -> i64 {
         }
     }
 
-    let mut target = 1;
-
-    for (factor, quantity) in target_factorization {
-        target *= (factor as u32).pow(quantity as u32);
-    }
-
-    return target as i64;
+    utils::num_from_prime_factorization_hist(target_factorization) as i64
 }
