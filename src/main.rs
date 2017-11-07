@@ -10,7 +10,7 @@ fn main() {
         process::exit(1);
     });
 
-    if let Err(e) = euler::run(&args.problem) {
+    if let Err(e) = euler::solve(&args.problem) {
         println!("Application error: {}", e);
         process::exit(1);
     }

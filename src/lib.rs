@@ -1,7 +1,8 @@
 use std::error::Error;
 use std::collections::HashMap;
-use std::time::Instant;
 use std::process;
+
+extern crate time;
 
 #[cfg(test)]
 mod tests {
@@ -26,7 +27,7 @@ impl Args {
     }
 }
 
-pub fn run(problem: &str) -> Result<(), Box<Error>> {
+pub fn solve(problem: &str) -> Result<(), Box<Error>> {
     let mut problems: HashMap<&str, fn() -> i64> = HashMap::new();
     problems.insert("001", problems::p001::solve);
     problems.insert("002", problems::p002::solve);
@@ -42,14 +43,14 @@ pub fn run(problem: &str) -> Result<(), Box<Error>> {
         }
     };
 
-    let start = Instant::now();
+    let start = time::precise_time_ns();
     let answer = solver();
-    let end = Instant::now();
+    let end = time::precise_time_ns();
 
-    let duration = end.duration_since(start);
-    let duration_in_sec = duration.as_secs() as f64 + duration.subsec_nanos() as f64 * 1e-9;
+    let duration_in_ns = end - start;
+    let duration_in_s = duration_in_ns as f64 / 1e9;
 
-    println!("Answer: {}  |  Elapsed Time: {:.6} seconds", answer, duration_in_sec);
+    println!("Answer: {}  |  Elapsed Time: {} nanoseconds = {:9} seconds", answer, duration_in_ns, duration_in_s);
 
     Ok(())
 }
