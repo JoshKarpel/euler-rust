@@ -2,6 +2,7 @@ use std::collections::HashMap;
 use std::hash::Hash;
 use std::cmp::Eq;
 
+
 pub fn prime_factorization(mut n: u64) -> Vec<u64> {
     let mut factors: Vec<u64> = Vec::new();
 
@@ -24,7 +25,8 @@ pub fn prime_factorization(mut n: u64) -> Vec<u64> {
     return factors;
 }
 
-pub fn hist<T: Hash + Eq>(v: Vec<T>) -> HashMap<T, u32> {
+
+pub fn count<T: Hash + Eq>(v: Vec<T>) -> HashMap<T, u32> {
     let mut h: HashMap<T, u32> = HashMap::new();
 
     for val in v {

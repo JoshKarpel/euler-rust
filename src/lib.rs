@@ -34,6 +34,7 @@ pub fn solve(problem: &str) -> Result<(), Box<Error>> {
     problems.insert("003", problems::p003::solve);
     problems.insert("005", problems::p005::solve);
     problems.insert("006", problems::p006::solve);
+    problems.insert("009", problems::p009::solve);
 
     let solver = match problems.get(problem) {
         Some(solver) => solver,
@@ -43,14 +44,11 @@ pub fn solve(problem: &str) -> Result<(), Box<Error>> {
         }
     };
 
-    let start = time::precise_time_ns();
+    let start = time::precise_time_s();
     let answer = solver();
-    let end = time::precise_time_ns();
+    let end = time::precise_time_s();
 
-    let duration_in_ns = end - start;
-    let duration_in_s = duration_in_ns as f64 / 1e9;
-
-    println!("Answer: {}  |  Elapsed Time: {} nanoseconds = {:9} seconds", answer, duration_in_ns, duration_in_s);
+    println!("Answer: {}  |  Elapsed Time: {:.9} seconds", answer, end - start);
 
     Ok(())
 }
