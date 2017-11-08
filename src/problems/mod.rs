@@ -6,3 +6,4 @@ pub mod p003;
 pub mod p005;
 pub mod p006;
 pub mod p009;
+pub mod p010;

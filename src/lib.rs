@@ -35,6 +35,7 @@ pub fn solve(problem: &str) -> Result<(), Box<Error>> {
     problems.insert("005", problems::p005::solve);
     problems.insert("006", problems::p006::solve);
     problems.insert("009", problems::p009::solve);
+    problems.insert("010", problems::p010::solve);
 
     let solver = match problems.get(problem) {
         Some(solver) => solver,

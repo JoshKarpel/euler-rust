@@ -5,3 +5,4 @@ authors = ["Josh Karpel"]
 
 [dependencies]
 time = "*"
+bit-vec = "*"
