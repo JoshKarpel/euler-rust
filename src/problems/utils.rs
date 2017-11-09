@@ -43,23 +43,6 @@ pub fn num_from_prime_factorization_hist(h: HashMap<u64, u32>) -> u64 {
         .fold(1, |x, (factor, quantity)| x * factor.pow(*quantity))
 }
 
-//pub fn sieve_of_eratosthenes(n: u64) -> Vec<u64> {
-//    let mut primes: Vec<u64> = Vec::new();
-//    let mut sieve: Vec<u64> = (2..n).collect();
-//
-//    while !sieve.is_empty() {
-//        let f = *sieve.first().unwrap();
-//        println!("first number is {}", f);
-//        sieve = sieve.into_iter()
-//            .filter(|x| x % f != 0)
-//            .collect();
-//        primes.push(f);
-//    }
-//
-//    println!("{:?}", primes);
-//
-//    primes
-//}
 
 pub fn sieve_of_eratosthenes(n: usize) -> Vec<u64> {
     let mut sieve = bit_vec::BitVec::from_elem(n + 1, true);
@@ -71,7 +54,7 @@ pub fn sieve_of_eratosthenes(n: usize) -> Vec<u64> {
     for p in 2..n {
         if sieve[p] {
             x = p * p;
-            while x < n {
+            while x <= n {
                 sieve.set(x, false);
                 x += p;
             }

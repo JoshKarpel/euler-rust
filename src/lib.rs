@@ -28,16 +28,9 @@ impl Args {
 }
 
 pub fn solve(problem: &str) -> Result<(), Box<Error>> {
-    let mut problems: HashMap<&str, fn() -> i64> = HashMap::new();
-    problems.insert("001", problems::p001::solve);
-    problems.insert("002", problems::p002::solve);
-    problems.insert("003", problems::p003::solve);
-    problems.insert("005", problems::p005::solve);
-    problems.insert("006", problems::p006::solve);
-    problems.insert("009", problems::p009::solve);
-    problems.insert("010", problems::p010::solve);
+    let solver_map: HashMap<&str, fn() -> i64> = get_solver_map();
 
-    let solver = match problems.get(problem) {
+    let solver = match solver_map.get(problem) {
         Some(solver) => solver,
         None => {
             println!("Couldn't find solver for problem {}!", problem);
@@ -54,3 +47,15 @@ pub fn solve(problem: &str) -> Result<(), Box<Error>> {
     Ok(())
 }
 
+pub fn get_solver_map() -> HashMap<&'static str, fn() -> i64> {
+    let mut problems: HashMap<&str, fn() -> i64> = HashMap::new();
+    problems.insert("001", problems::p001::solve);
+    problems.insert("002", problems::p002::solve);
+    problems.insert("003", problems::p003::solve);
+    problems.insert("005", problems::p005::solve);
+    problems.insert("006", problems::p006::solve);
+    problems.insert("009", problems::p009::solve);
+    problems.insert("010", problems::p010::solve);
+
+    problems
+}
