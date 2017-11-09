@@ -51,6 +51,7 @@ pub fn get_solver_map() -> HashMap<&'static str, fn() -> i64> {
     problems.insert("009", problems::p009::solve);
     problems.insert("010", problems::p010::solve);
     problems.insert("012", problems::p012::solve);
+    problems.insert("014", problems::p014::solve);
 
     problems
 }
