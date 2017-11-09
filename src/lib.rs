@@ -4,13 +4,7 @@ use std::process;
 
 extern crate time;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {}
-}
-
-mod problems;
+pub mod problems;
 
 pub struct Args {
     pub problem: String,
@@ -56,6 +50,7 @@ pub fn get_solver_map() -> HashMap<&'static str, fn() -> i64> {
     problems.insert("006", problems::p006::solve);
     problems.insert("009", problems::p009::solve);
     problems.insert("010", problems::p010::solve);
+    problems.insert("012", problems::p012::solve);
 
     problems
 }
