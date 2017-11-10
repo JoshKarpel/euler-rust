@@ -1,6 +1,8 @@
 use std::error::Error;
 use std::collections::HashMap;
 use std::process;
+use std::fs::File;
+use std::io::prelude::*;
 
 extern crate time;
 
@@ -24,6 +26,9 @@ impl Args {
 pub fn solve(problem: &str) -> Result<(), Box<Error>> {
     let solver_map: HashMap<&str, fn() -> i64> = get_solver_map();
 
+    let answers = read_answers();
+    let answer_map: HashMap<String, i64> = parse_answer_map(answers);
+
     let solver = match solver_map.get(problem) {
         Some(solver) => solver,
         None => {
@@ -36,7 +41,17 @@ pub fn solve(problem: &str) -> Result<(), Box<Error>> {
     let answer = solver();
     let end = time::precise_time_s();
 
-    println!("Answer: {}  |  Elapsed Time: {:.9} seconds", answer, end - start);
+    let correct = match answer_map.get(problem) {
+        Some(c) => {
+            match *c == answer {
+                true => "✓",
+                false => "✘",
+            }
+        },
+        None => "?",
+    };
+
+    println!("Answer: {} {} |  Elapsed Time: {:.6} seconds", answer, correct, end - start);
 
     Ok(())
 }
@@ -54,4 +69,33 @@ pub fn get_solver_map() -> HashMap<&'static str, fn() -> i64> {
     problems.insert("014", problems::p014::solve);
 
     problems
+}
+
+pub fn read_answers() -> String {
+    let mut f = File::open("data/answers.txt")
+        .expect("Answers file not found");
+
+    let mut contents = String::new();
+    f.read_to_string(&mut contents)
+        .expect("Couldn't read answers file");
+
+    contents
+}
+
+pub fn parse_answer_map(answers: String) -> HashMap<String, i64> {
+    let mut intermediate: HashMap<&str, &str> = HashMap::new();
+    for line in answers.split_terminator("\n") {
+        let p_and_a: Vec<&str> = line.split(":").collect();
+        intermediate.insert(p_and_a[0], p_and_a[1]);
+    }
+
+    let mut answer_map: HashMap<String, i64> = HashMap::new();
+    for (problem, answer) in intermediate {
+        match answer.parse::<i64>() {
+            Ok(x) => { answer_map.insert(problem.to_string(), x); },
+            Err(_) => {}
+        }
+    }
+
+    answer_map
 }
