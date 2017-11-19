@@ -33,14 +33,14 @@ pub fn prime_factorization(mut n: u64) -> Vec<u64> {
         n /= 2;
     }
 
-    let mut x: u64 = 3;
+    let mut divisor: u64 = 3;
 
     while n > 1 {
-        if n % x == 0 {
-            factors.push(x);
-            n /= x;
+        if n % divisor == 0 {
+            factors.push(divisor);
+            n /= divisor;
         } else {
-            x += 2;
+            divisor += 2;
         }
     }
 

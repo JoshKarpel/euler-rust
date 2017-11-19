@@ -1,17 +1,17 @@
 pub fn solve() -> i64 {
-    let mut fib_nm1 = 1;
-    let mut fib_n = 1;
-    let mut next;
+    let mut fib_prev = 1;
+    let mut fib_curr = 1;
+    let mut fib_next;
     let mut acc = 0;
 
-    while fib_n < 4000000 {
-        if fib_n % 2 == 0 {
-            acc += fib_n;
+    while fib_curr < 4000000 {
+        if fib_curr % 2 == 0 {
+            acc += fib_curr;
         }
 
-        next = fib_n + fib_nm1;
-        fib_nm1 = fib_n;
-        fib_n = next;
+        fib_next = fib_curr + fib_prev;
+        fib_prev = fib_curr;
+        fib_curr = fib_next;
     }
 
     acc

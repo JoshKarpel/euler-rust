@@ -5,9 +5,6 @@ fn sum_of_proper_factors(&n: &u64) -> u64 {
     utils::proper_factorization(n).iter().sum()
 }
 
-//fn is_pair_amicable(&a: &u64, &b: &u64) -> bool {
-//    a == sum_of_proper_factors(&b) && b == sum_of_proper_factors(&a)
-//}
 
 fn find_amicable_pair(a: u64) -> Option<(u64, u64)> {
     let b: u64 = sum_of_proper_factors(&a);
