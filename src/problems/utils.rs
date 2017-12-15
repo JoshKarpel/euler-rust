@@ -96,3 +96,7 @@ pub fn pentagon_number(&n: &u64) -> u64 {
 pub fn hexagon_number(&n: &u64) -> u64 {
     n * ((2 * n) - 1)
 }
+
+pub fn factorial(&n: &u64) -> u64 {
+    (1..n + 1).fold(1, |prod, element| prod * element)
+}
