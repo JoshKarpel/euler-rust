@@ -15,17 +15,13 @@ fn is_abundant(n: &u64) -> bool {
 }
 
 pub fn solve() -> i64 {
-    let upper_bound: u64 = 28123;
-//    let abundant_numbers: HashSet<u64> = HashSet::from_iter((1..upper_bound + 1).filter(|&n| is_abundant(&n)));
-//    let mut abundant_sums: HashSet<u64> = HashSet::new();
+    let upper_bound: u64 = 28_123;
     let abundant_numbers: Vec<u64> = (1..upper_bound + 1).filter(|&n| is_abundant(&n)).collect();
     let mut abundant_sums: Vec<u64> = Vec::new();
 
     for n in &abundant_numbers {
         for m in &abundant_numbers {
             if m > n { continue }
-//            println!("{}, {}", n, m);
-//            abundant_sums.insert(n + m);
             abundant_sums.push(n + m);
         }
     }

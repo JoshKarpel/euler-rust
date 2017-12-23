@@ -14,7 +14,7 @@ pub fn solve() -> i64 {
     let mut n;
     let mut len;
 
-    for start in 1..1000000 {
+    for start in 1..1_000_000 {
         n = start;
         len = 1;
 

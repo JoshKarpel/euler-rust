@@ -4,7 +4,7 @@ pub fn solve() -> i64 {
     let mut fib_next;
     let mut acc = 0;
 
-    while fib_curr < 4000000 {
+    while fib_curr < 4_000_000 {
         if fib_curr % 2 == 0 {
             acc += fib_curr;
         }

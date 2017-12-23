@@ -23,7 +23,7 @@ fn find_amicable_pair(a: u64) -> Option<(u64, u64)> {
 pub fn solve() -> i64 {
     let mut amicable_numbers: Vec<u64> = Vec::new();
 
-    for a in 1..10000 {
+    for a in 1..10_000 {
         match find_amicable_pair(a) {
             Some((a, b)) => {
                 amicable_numbers.push(a);

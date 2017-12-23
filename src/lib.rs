@@ -43,11 +43,8 @@ pub fn solve(problem: &str) -> Result<(), Box<Error>> {
 
     let correct = match answer_map.get(problem) {
         Some(c) => {
-            match *c == answer {
-                true => "✓",
-                false => "✘",
-            }
-        },
+            if *c == answer { "✓" } else { "✘" }
+        }
         None => "?",
     };
 
@@ -88,16 +85,15 @@ pub fn read_answers() -> String {
 
 pub fn parse_answer_map(answers: String) -> HashMap<String, i64> {
     let mut intermediate: HashMap<&str, &str> = HashMap::new();
-    for line in answers.split_terminator("\n") {
-        let p_and_a: Vec<&str> = line.split(":").collect();
+    for line in answers.split_terminator('\n') {
+        let p_and_a: Vec<&str> = line.split(':').collect();
         intermediate.insert(p_and_a[0], p_and_a[1]);
     }
 
     let mut answer_map: HashMap<String, i64> = HashMap::new();
     for (problem, answer) in intermediate {
-        match answer.parse::<i64>() {
-            Ok(x) => { answer_map.insert(problem.to_string(), x); },
-            Err(_) => {}
+        if let Ok(x) = answer.parse::<i64>() {
+            answer_map.insert(problem.to_string(), x);
         }
     }
 

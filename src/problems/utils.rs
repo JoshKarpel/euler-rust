@@ -44,7 +44,7 @@ pub fn prime_factorization(mut n: u64) -> Vec<u64> {
         }
     }
 
-    return factors;
+    factors
 }
 
 
@@ -55,11 +55,11 @@ pub fn count<T: Hash + Eq>(v: Vec<T>) -> HashMap<T, u32> {
         *h.entry(val).or_insert(0) += 1;
     }
 
-    return h;
+    h
 }
 
 
-pub fn num_from_prime_factorization_hist(h: HashMap<u64, u32>) -> u64 {
+pub fn num_from_prime_factorization_hist(h: &HashMap<u64, u32>) -> u64 {
     h.iter()
         .fold(1, |x, (factor, quantity)| x * factor.pow(*quantity))
 }

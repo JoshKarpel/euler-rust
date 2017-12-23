@@ -15,5 +15,5 @@ pub fn solve() -> i64 {
         }
     }
 
-    utils::num_from_prime_factorization_hist(target_factorization) as i64
+    utils::num_from_prime_factorization_hist(&target_factorization) as i64
 }
